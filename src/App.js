@@ -7,6 +7,7 @@ import Contact from './components/contactus/Contact';
 import Home from './components/home/Home';
 import UserDashboard from './components/UserDashboard/UserDashboard';
 import Cart from './components/cart/Cart';
+import Search from './components/search/Search';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
   
 
 
-
+  <Search/>
 
 
 
@@ -25,8 +26,8 @@ function App() {
 
 
       <Routes>
-        <Route path='' element={<Home/>}/>
-        <Route path='home' element={<Home/>}/>
+        {/* <Route path='' element={<Home/>}/> */}
+        {/* <Route path='home' element={<Home/>}/> */}
         <Route path='signup' element={<Signup/>}/>
         <Route path='login' element={<Login/>}/>
         <Route path='contact' element={<Contact/>}/>
