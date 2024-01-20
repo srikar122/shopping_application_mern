@@ -17,12 +17,27 @@ productApp.get("/getproduct/:id",expressAynsHandler( async (request,response)=>{
 }))
 
 
+productApp.get("/search/:searchString",expressAynsHandler( async (request,response)=>{
+    let searchString = (request.params.searchString)
+    let productDataObject = request.app.get("productDataObject")
+    const regex = new RegExp(`.*${searchString}.*`, 'i');
+    let products = await productDataObject.find({title : regex}).toArray()
+    // console.log(searchString,products)
+    if(products.length == 0) response.send({message:"no items found"})
+    else response.send({message:"found",payload:products})
+}))
 
 
 productApp.post("/createproduct",expressAynsHandler( async(request,response)=>{
     const productdataObject = request.app.get("productDataObject")
     const dataObject = request.body
-    let result = await productdataObject.insertOne(dataObject)
+    let result = await productdataObject.insertMany(dataObject)
     response.send({message:"added"})
+}))
+
+productApp.delete("/deleteAll",expressAynsHandler( async(request,response)=>{
+    const productdataObject = request.app.get("productDataObject")
+    let res = await productdataObject.deleteMany({})
+    response.send({message:`deleted ${res.deletedCount} items`})
 }))
 module.exports = productApp

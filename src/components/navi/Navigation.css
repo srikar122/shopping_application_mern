@@ -1,3 +1,18 @@
+/* Navigation.css */
+
+.custom-shadow {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .apple-font {
+    font-family: 'Your-Apple-Font', sans-serif; /* Replace 'Your-Apple-Font' with the actual font name */
+  }
+  
+.navigation-font{
+    font-size: 17px !important;
+    font-family: 'Roboto', sans-serif;
+    padding: 0px 50px !important;
+}
 .navi-main{
-    color: blue;
+    background-color: #282727;
 }

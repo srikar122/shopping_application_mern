@@ -1,7 +1,13 @@
-POST http://localhost:3000/cart/addproduct
+POST http://localhost:3000/product/createProduct
 Content-Type: application/json
 
 {
-    "productId" : 100,
-    "username" : "srikar"
+
 }
+####
+
+GET http://localhost:3000/product/search/amazon
+
+#######
+
+DELETE http://localhost:3000/product/deleteAll
