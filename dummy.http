@@ -1,9 +1,5 @@
-POST http://localhost:3000/product/createProduct
-Content-Type: application/json
+GET http://localhost:3000/product/createProduct
 
-{
-
-}
 ####
 
 GET http://localhost:3000/product/search/amazon

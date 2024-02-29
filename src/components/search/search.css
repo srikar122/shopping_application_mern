@@ -1,0 +1,43 @@
+.mapper-div{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+
+}
+/* styles.css (or any other name you prefer) */
+
+.search-container {
+    margin: 20px;
+  }
+  
+  .search-container .form {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-container form input {
+    padding: 10px;
+    margin-right: 10px;
+    width: 200px;
+  }
+  
+  .mapper-div {
+    margin: 20px;
+  }
+  
+  .card-img {
+    object-fit: cover;
+    max-height: 250px;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .no-items-found {
+    margin: 20px;
+    color: red;
+  }
+  
+  /* Add any other styles as needed */
+  

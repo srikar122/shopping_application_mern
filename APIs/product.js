@@ -1,5 +1,7 @@
 const productApp= require("express").Router()
 const expressAynsHandler = require("express-async-handler")
+const fs = require('fs');
+
 
 productApp.get("/getproducts",expressAynsHandler(async (request,response)=>{
     let productDataObject = request.app.get("productDataObject")
@@ -28,9 +30,10 @@ productApp.get("/search/:searchString",expressAynsHandler( async (request,respon
 }))
 
 
-productApp.post("/createproduct",expressAynsHandler( async(request,response)=>{
+productApp.get("/createproduct",expressAynsHandler( async(request,response)=>{
+    const jsonFilePath = 'D:/major/major_back/combined_json.json'
     const productdataObject = request.app.get("productDataObject")
-    const dataObject = request.body
+    const dataObject = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
     let result = await productdataObject.insertMany(dataObject)
     response.send({message:"added"})
 }))

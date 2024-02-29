@@ -8,3 +8,9 @@
     padding: 1rem;
     margin: 1rem;
 }
+.css-1ri6ub7-MuiPaper-root-MuiCard-root{
+    max-height: 400px;
+}
+.card-image{
+    height: 200px;
+}

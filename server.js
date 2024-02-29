@@ -5,18 +5,6 @@ const path = require("path")
 const cors=require('cors')
 // app.use(exp.static(path.join(__dirname,"./build")))
 
-const {PythonShell, PythonShellError} = require("python-shell")
-// import { PythonShell, PythonShellError } from "python-shell"
-let options={
-    scriptPath: "/mern_apps/Mern_App",
-    args:["oman","gay"],
-};
-
-PythonShell.run("temp.py",options,(err,res)=>{
-    if(err) console.log(err)
-    if(res) console.log(res)
-})
-
 
 
 
