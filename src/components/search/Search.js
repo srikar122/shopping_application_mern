@@ -20,6 +20,22 @@ function Search() {
   let {register, handleSubmit, formState:{errors}} = useForm()
   let [find,setFind] = useState(false)
 
+
+
+
+  const [brands] = useState(['','hp', 'apple', 'asus', 'samsung', 'omen']);
+  const [platforms] = useState(['','amazon', 'flipkart']);
+  const [types] = useState(['','laptop', 'phone', 'AC', 'fridge']);
+  const [selectedBrand, setSelectedBrand] = useState('');
+  const [selectedPlatform, setSelectedPlatform] = useState('');
+  const [selectedType, setSelectedType] = useState('');
+  const [minPrice, setMinPrice] = useState(0);
+  const [maxPrice, setMaxPrice] = useState(1000000);
+  const handleBrandChange = (e) => setSelectedBrand(e.target.value);
+  const handlePlatformChange = (e) => setSelectedPlatform(e.target.value);
+  const handleTypeChange = (e) => setSelectedType(e.target.value);
+  const handleMinPriceChange = (e) => setMinPrice(e.target.value);
+  const handleMaxPriceChange = (e) => setMaxPrice(e.target.value);
   //form submission
   let onFormSubmit = (obj)=>{
     setFlag(true)
@@ -34,15 +50,15 @@ function Search() {
     if(flag == true){
       let call = async()=>{
         console.log("serach string is",searchData)
-        let res = await axios.get(`http://localhost:3000/product/search/${searchData}`)
+        let res = await axios.get(`http://localhost:3000/product/search?keyword=${searchData}&brand=${selectedBrand}&type=${selectedType}&platform=${selectedPlatform}`)
         console.log(res)
         if(res.data.message == "no items found"){
           console.log("data not fodund")
           setFind(false)
         }
         else{
-          setItems(res.data.payload)
-          console.log("data from server is",res.data.payload)
+          setItems(res.data.products)
+          console.log("nuimber from server is",res.data.productCount)
           setFind(true)
           console.log("data found")
         }
@@ -94,77 +110,97 @@ function Search() {
 
   return (
     <div className='search-container'>
-      implementing search
+      <div className='search-page'>
+    <div className='search-bar'>
       <form onSubmit={handleSubmit(onFormSubmit)}>
-        <input type="text" {...register("searchInput")}/>
+        <input type="text" {...register("searchInput")} placeholder="Search..."/>
       </form>
-      {rec &&
-      // <h1>recommending</h1>
-      <Recommend data = {recommendedProducts}/>
+    </div>
 
-      }
-
-    {
-      find 
-      ?
-      <div className='mapper-div'>
-        <h1> searched products</h1>
-        <br></br>
-        {
-             items.map((item,index)=>{
-              return(
-                // <div className="serachItems">
-                // <h3>{item.title}</h3>
-                //   <p>{item.description}</p>
-                //   <p>{item.stars}</p>
-                //   <p>{item.link}</p>
-                //   <p>{item.price}</p>
-                //   <p>{item.platform}</p>
-                //   <p>{item.type}</p>
-                  
-                // </div>
-                <Card sx={{ maxWidth: 345 }} style={{'padding' : '20px', 'margin' : '20px 40px', 'max-height' : '600px'}}>
-            <CardActionArea>
-              <CardMedia
-                component="img"
-                height="140"
-                image={item.image}
-                alt="green iguana"
-                className='card-img'
-                style={{'height' : '250px'}}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {item.title}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {item.description}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {item.price}
-                </Typography>
-             
-              </CardContent>
-            </CardActionArea>
-            <CardActions>
-              <Button size="small" color="primary" onClick={()=>{
-                setPro(item.title)
-                setRec(true)
-                return recommend(item.title)
-                }} >
-                recommend
-              </Button>
-            </CardActions>
-          </Card>
-              )
-      
-            })
-        }
+    <div className='content'>
+      <div className='left-panel'>
+      <div className='filter'>
+            <label>Brand</label>
+            <select value={selectedBrand} onChange={handleBrandChange}>
+              {brands.map((brand, index) => (
+                <option key={index} value={brand}>{brand}</option>
+              ))}
+            </select>
+          </div>
+          <div className='filter'>
+            <label>Platform</label>
+            <select value={selectedPlatform} onChange={handlePlatformChange}>
+              {platforms.map((platform, index) => (
+                <option key={index} value={platform}>{platform}</option>
+              ))}
+            </select>
+          </div>
+          <div className='filter'>
+            <label>Type</label>
+            <select value={selectedType} onChange={handleTypeChange}>
+              {types.map((type, index) => (
+                <option key={index} value={type}>{type}</option>
+              ))}
+            </select>
+          </div>
+          <div className='filter'>
+            <label>Price Range</label>
+            <div className="price-range">
+              <input type="number" value={minPrice} onChange={handleMinPriceChange} placeholder="Min Price" />
+              to
+              <input type="number" value={maxPrice} onChange={handleMaxPriceChange} placeholder="Max Price" />
+            </div>
+          </div>
       </div>
+
+      <div className='right-panel'>
+        {rec && <Recommend data={recommendedProducts}/>}
+
+        {find ? (
+          <div className='search-results'>
+            <h1>Searched Products</h1>
+            {items && items.map((item, index) => (
+             <Card sx={{ maxWidth: 345 }} style={{'padding' : '20px', 'margin' : '20px 40px', 'max-height' : '600px'}}>
+             <CardActionArea>
+               <CardMedia
+                 component="img"
+                 height="140"
+                 image={item.image}
+                 alt="green iguana"
+                 className='card-img'
+                 style={{'height' : '250px'}}
+               />
+               <CardContent>
+                 <Typography gutterBottom variant="h5" component="div">
+                   {item.title}
+                 </Typography>
+                 <Typography variant="body2" color="text.secondary">
+                   {item.description}
+                 </Typography>
+                 <Typography variant="body2" color="text.secondary">
+                   {item.price}
+                 </Typography>
+              
+               </CardContent>
+             </CardActionArea>
+             <CardActions>
+               <Button size="small" color="primary" onClick={()=>{
+                 setPro(item.title)
+                 setRec(true)
+                 return recommend(item.title)
+                 }} >
+                 recommend
+               </Button>
+             </CardActions>
+           </Card>
+            ))}
+          </div>
+        ) : <h1>No items found</h1>}
+      </div>
+    </div>
+  </div>
+      
      
-      :
-      <h1>no items found</h1>
-    }
 
 
 

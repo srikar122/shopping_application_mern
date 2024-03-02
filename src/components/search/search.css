@@ -40,4 +40,37 @@
   }
   
   /* Add any other styles as needed */
+  .search-page {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .search-bar {
+    margin-bottom: 20px;
+  }
+  
+  .content {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .left-panel, .right-panel {
+    flex-basis: 50%;
+  }
+  
+  .filter {
+    margin-bottom: 20px;
+  }
+  
+  .filter label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .search-results {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* You can add more styling details such as padding, margins, font sizes, etc., based on your design preferences */
   

@@ -2,7 +2,7 @@ GET http://localhost:3000/product/createProduct
 
 ####
 
-GET http://localhost:3000/product/search/amazon
+GET http://localhost:3000/product/search?keyword=lap&brand=&type=&priceL=0&priceH=10000000
 
 #######
 
