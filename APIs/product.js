@@ -66,11 +66,11 @@ productApp.get("/search", expressAynsHandler(async (req, res, next) => {
 
 
 productApp.get("/createproduct", expressAynsHandler(async (request, response) => {
-    const jsonFilePath = 'D:/major/major_back/combined_json.json'
+    const jsonFilePath = 'src/data/totalData.json'
     const productdataObject = request.app.get("productDataObject")
     const dataObject = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
     let result = await productdataObject.insertMany(dataObject)
-    response.send({ message: "added" })
+    response.send({ message: "added", payload: `products added are`})
 }))
 
 productApp.delete("/deleteAll", expressAynsHandler(async (request, response) => {

@@ -27,8 +27,8 @@ useEffect(()=>{
 // useEffect(async()=>{},[])
 
   return (
-    <div >
-      <Link to ="cart">cart</Link>
+    <div className='mt-5' style={{"margin" : "100px"}}>
+      <Link to ="cart" className=' bg-dark px-3 py-3 m-5'>cart</Link>
       <Outlet></Outlet>
     </div>
   )
